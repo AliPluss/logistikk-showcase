@@ -50,29 +50,7 @@ Prosjektet er et gruppearbeid. Denne presentasjonen beskriver mitt bidrag og utv
 
 Hele miljøet kjører på en server jeg har installert og konfigurert selv.
 
-```mermaid
-flowchart TB
-    user["👤 Brukere<br/>lærer · elev · kunde"] -->|HTTPS| nginx
-    admin["🔐 Utviklere og drift"] -.->|Tailscale| host
-
-    subgraph host["Proxmox VE"]
-        subgraph vm["Rocky Linux"]
-            nginx["Nginx<br/>reverse proxy"]
-            subgraph docker["Docker"]
-                web["Next.js<br/>webgrensesnitt"]
-                api["ASP.NET Core<br/>API · JWT"]
-                seq["Seq<br/>logging"]
-            end
-            db[("PostgreSQL")]
-        end
-    end
-
-    nginx --> web
-    nginx --> api
-    web -->|REST| api
-    api --> db
-    api -.->|logger| seq
-```
+![Serverarkitektur: Proxmox, Rocky Linux, Nginx, Docker, ASP.NET Core, Next.js, PostgreSQL, Seq og Tailscale](assets/06-arkitektur.png)
 
 | Komponent | Rolle |
 | --- | --- |
